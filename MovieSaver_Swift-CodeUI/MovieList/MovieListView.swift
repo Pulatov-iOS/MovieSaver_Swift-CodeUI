@@ -4,10 +4,11 @@ import UIKit
 final class MovieListView: UIViewController {
     
     // MARK: - Public properties
-    var viewModel: MovieListViewModel!
+    var presenter: MovieListPresenter!
     
     // MARK: - Private properties
     private let tableView = UITableView()
+    private let titleName = "My Movie List"
     
     // MARK: - LyfeCycle
     override func viewDidLoad() {
@@ -15,16 +16,25 @@ final class MovieListView: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "CustomCell")
         
         addSubiews()
-        
 //        configConstraint()
-//        configUI()
+        configUI()
     }
     
     // MARK: - Helpers
     private func addSubiews() {
         view.addSubview(tableView)
+    }
+    
+    private func configUI() {
+        title = titleName
+        navigationController?.navigationBar.prefersLargeTitles = true
+        view.backgroundColor = UIColor(resource: .movieListViewBackground)
+        
+        tableView.frame = view.bounds
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
     }
 }
 
@@ -32,10 +42,12 @@ final class MovieListView: UIViewController {
 extension MovieListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        <#code#>
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        <#code#>
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! MovieTableViewCell
+            
+        return cell
     }
 }
