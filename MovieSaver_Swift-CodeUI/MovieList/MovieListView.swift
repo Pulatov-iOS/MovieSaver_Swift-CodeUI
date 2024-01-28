@@ -1,7 +1,11 @@
 
 import UIKit
 
-final class MovieListView: UIViewController {
+protocol MovieListView: AnyObject {
+    func updateMovieListView(movies: String)
+}
+
+final class DefaultMovieListView: UIViewController {
     
     // MARK: - Public properties
     var presenter: MovieListPresenter!
@@ -50,12 +54,20 @@ final class MovieListView: UIViewController {
     }
     
     @objc private func addMovieButtonTapped() {
+        presenter.addMovieButtonTapped()
+    }
+}
 
+// MARK: - MovieListView
+extension DefaultMovieListView: MovieListView {
+    
+    func updateMovieListView(movies: String) {
+        
     }
 }
 
 // MARK: - Table ViewDelegate/DataSource
-extension MovieListView: UITableViewDelegate, UITableViewDataSource {
+extension DefaultMovieListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 20
@@ -73,7 +85,7 @@ extension MovieListView: UITableViewDelegate, UITableViewDataSource {
 }
 
 // MARK: - MovieTableViewCellDelegate
-extension MovieListView: MovieTableViewCellDelegate {
+extension DefaultMovieListView: MovieTableViewCellDelegate {
     
     func didSelectCell(_ cell: MovieTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }

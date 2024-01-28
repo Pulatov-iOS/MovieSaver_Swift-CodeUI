@@ -14,13 +14,20 @@ final class Coordinator {
     }
     
     private func showMovieListScreen() {
-        let view = MovieListView()
+        let view = DefaultMovieListView()
         let presenter = DefaultMovieListPresenter(view: view)
         view.presenter = presenter
         rootNavigationController.pushViewController(view, animated: true)
+        
+        presenter.showAddMoviePage = { [weak self] in
+            self?.showAddMovieScreen()
+        }
     }
     
     private func showAddMovieScreen() {
-        
+        let view = DefaultAddMovieView()
+        let presenter = DefaultAddMoviePresenter(view: view)
+        view.presenter = presenter
+        rootNavigationController.pushViewController(view, animated: true)
     }
 }
