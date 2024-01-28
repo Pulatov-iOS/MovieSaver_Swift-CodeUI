@@ -9,18 +9,16 @@ final class MovieListView: UIViewController {
     // MARK: - Private properties
     private let tableView = UITableView()
     private let titleName = "My Movie List"
+    private let heightTableCell = 212
     
     // MARK: - LyfeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "CustomCell")
-        
         addSubiews()
-//        configConstraint()
         configUI()
+        setupTableView()
+        addMovieButton()
     }
     
     // MARK: - Helpers
@@ -32,9 +30,27 @@ final class MovieListView: UIViewController {
         title = titleName
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = UIColor(resource: .movieListViewBackground)
-        
+    }
+    
+    private func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.frame = view.bounds
         tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 22, right: 0)
+        tableView.separatorStyle = .none
+        tableView.allowsSelection = false
+        tableView.backgroundColor = .clear
+        tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "CustomCell")
+    }
+    
+    private func addMovieButton() {
+        let addMovieButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMovieButtonTapped))
+        navigationItem.rightBarButtonItem = addMovieButton
+    }
+    
+    @objc private func addMovieButtonTapped() {
+
     }
 }
 
@@ -42,12 +58,24 @@ final class MovieListView: UIViewController {
 extension MovieListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 20
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! MovieTableViewCell
-            
+        cell.delegate = self
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(heightTableCell)
+    }
+}
+
+// MARK: - MovieTableViewCellDelegate
+extension MovieListView: MovieTableViewCellDelegate {
+    
+    func didSelectCell(_ cell: MovieTableViewCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
     }
 }
