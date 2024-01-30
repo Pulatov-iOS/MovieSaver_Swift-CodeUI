@@ -1,4 +1,3 @@
-
 import UIKit
 
 protocol MovieListView: AnyObject {
@@ -19,18 +18,18 @@ final class DefaultMovieListView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        addSubiews()
-        configUI()
+        addSubviews()
+        configureUI()
         setupTableView()
-        addMovieButton()
+        addMovieButtonAddToScreen()
     }
     
     // MARK: - Helpers
-    private func addSubiews() {
+    private func addSubviews() {
         view.addSubview(tableView)
     }
     
-    private func configUI() {
+    private func configureUI() {
         title = titleName
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = UIColor(resource: .movieListViewBackground)
@@ -44,11 +43,12 @@ final class DefaultMovieListView: UIViewController {
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 22, right: 0)
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
+        tableView.showsVerticalScrollIndicator = false
         tableView.backgroundColor = .clear
         tableView.register(MovieTableViewCell.self, forCellReuseIdentifier: "CustomCell")
     }
     
-    private func addMovieButton() {
+    private func addMovieButtonAddToScreen() {
         let addMovieButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addMovieButtonTapped))
         navigationItem.rightBarButtonItem = addMovieButton
     }

@@ -1,4 +1,3 @@
-
 import UIKit
 
 protocol MovieTableViewCellDelegate: AnyObject {
@@ -18,9 +17,9 @@ final class MovieTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        addSubiews()
-        configConstraint()
-        configUI()
+        addSubviews()
+        configureConstraints()
+        configureUI()
         cellTappedHandler()
     }
     
@@ -28,14 +27,14 @@ final class MovieTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func addSubiews() {
+    private func addSubviews() {
         contentView.addSubview(containerView)
         containerView.addSubview(movieImageView)
         containerView.addSubview(nameLabel)
         containerView.addSubview(ratingLabel)
     }
     
-    private func configConstraint() {
+    private func configureConstraints() {
         containerView.translatesAutoresizingMaskIntoConstraints = false
         movieImageView.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -62,7 +61,7 @@ final class MovieTableViewCell: UITableViewCell {
         ])
     }
     
-    private func configUI() {
+    private func configureUI() {
         backgroundColor = .clear
         
         containerView.backgroundColor = .cellBackground

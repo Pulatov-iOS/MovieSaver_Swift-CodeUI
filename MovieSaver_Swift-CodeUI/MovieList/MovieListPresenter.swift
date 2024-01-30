@@ -1,4 +1,3 @@
-
 protocol MovieListPresenter: AnyObject {
     func addMovieButtonTapped()
 }
