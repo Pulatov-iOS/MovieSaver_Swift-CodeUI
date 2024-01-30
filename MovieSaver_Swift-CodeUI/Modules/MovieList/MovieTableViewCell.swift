@@ -35,10 +35,9 @@ final class MovieTableViewCell: UITableViewCell {
     }
     
     private func configureConstraints() {
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        movieImageView.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        ratingLabel.translatesAutoresizingMaskIntoConstraints = false
+        [containerView, movieImageView, nameLabel, ratingLabel].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22),
@@ -70,12 +69,24 @@ final class MovieTableViewCell: UITableViewCell {
         containerView.layer.shadowRadius = 16
         containerView.layer.cornerRadius = 8
         
-        nameLabel.text = "Spider-Man: No Way Home"
+        movieImageView.clipsToBounds = true
+        movieImageView.layer.cornerRadius = 8
+        movieImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+    }
+    
+    func setInformation(movie: Movie?) {
+        if let dateImage = movie?.image {
+            if let image = UIImage(data: dateImage) {
+                movieImageView.image = image
+            }
+        }
+        
+        nameLabel.text = movie?.name ?? ""
         nameLabel.textAlignment = .center
-        nameLabel.numberOfLines = 0
+        nameLabel.numberOfLines = 3
         nameLabel.font = .manrope(ofSize: 18, style: .medium)
         
-        let text = "8.9/10"
+        let text = ("\(movie?.rating ?? 0.0)/10")
         let attributedRatingText = NSMutableAttributedString(string: text)
         let ratingRange = NSRange(location: 0, length: min(3, text.count))
         let totalRange = NSRange(location: ratingRange.length, length: text.count - ratingRange.length)

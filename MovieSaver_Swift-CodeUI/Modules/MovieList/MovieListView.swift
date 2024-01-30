@@ -1,7 +1,7 @@
 import UIKit
 
 protocol MovieListView: AnyObject {
-    func updateMovieListView(movies: String)
+    func updateMovieListView(movies: [Movie])
 }
 
 final class DefaultMovieListView: UIViewController {
@@ -10,6 +10,11 @@ final class DefaultMovieListView: UIViewController {
     var presenter: MovieListPresenter!
     
     // MARK: - Private properties
+    private var movies = [Movie]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     private let tableView = UITableView()
     private let titleName = "My Movie List"
     private let heightTableCell = 212
@@ -22,6 +27,12 @@ final class DefaultMovieListView: UIViewController {
         configureUI()
         setupTableView()
         addMovieButtonAddToScreen()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        presenter.getMovies()
     }
     
     // MARK: - Helpers
@@ -61,8 +72,8 @@ final class DefaultMovieListView: UIViewController {
 // MARK: - MovieListView
 extension DefaultMovieListView: MovieListView {
     
-    func updateMovieListView(movies: String) {
-        
+    func updateMovieListView(movies: [Movie]) {
+        self.movies = movies
     }
 }
 
@@ -70,12 +81,13 @@ extension DefaultMovieListView: MovieListView {
 extension DefaultMovieListView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! MovieTableViewCell
         cell.delegate = self
+        cell.setInformation(movie: movies[indexPath.row])
         return cell
     }
     
@@ -89,5 +101,6 @@ extension DefaultMovieListView: MovieTableViewCellDelegate {
     
     func didSelectCell(_ cell: MovieTableViewCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
+        presenter.tableCellTapped(movies[indexPath.row])
     }
 }

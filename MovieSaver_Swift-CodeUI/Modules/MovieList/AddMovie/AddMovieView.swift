@@ -71,13 +71,9 @@ final class DefaultAddMovieView: UIViewController {
     }
     
     private func configureConstraints() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        addImageButtonBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        addImageButtomImageView.translatesAutoresizingMaskIntoConstraints = false
-        addImageButton.translatesAutoresizingMaskIntoConstraints = false
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        descriptionTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
+        [scrollView, addImageButtonBackgroundView, addImageButtomImageView, addImageButton, stackView, descriptionTitleLabel, descriptionTextView].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         imageViewWidthConstraint = addImageButtomImageView.widthAnchor.constraint(equalToConstant: 70)
         imageViewHeightConstraint = addImageButtomImageView.heightAnchor.constraint(equalToConstant: 70)
@@ -196,9 +192,9 @@ final class DefaultAddMovieView: UIViewController {
         
         addSubviews([titleLabel, movieInformationLabel, addInformationButton], to: view)
         
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        movieInformationLabel.translatesAutoresizingMaskIntoConstraints = false
-        addInformationButton.translatesAutoresizingMaskIntoConstraints = false
+        [titleLabel, movieInformationLabel, addInformationButton].forEach {
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
         
         NSLayoutConstraint.activate([
             view.widthAnchor.constraint(equalToConstant: 125),
@@ -269,7 +265,8 @@ final class DefaultAddMovieView: UIViewController {
     }
     
     @objc func saveMovieButtonTapped() {
-        
+        let newMovieDTO = MovieDTO(name: "1", rating: 8.3, releaseDate: Date(), link: "https://github.com/Pulatov-iOS", descriptions: descriptionTextView.text ?? "", image: UIImage(resource: .default).jpegData(compressionQuality: 1.0)!)
+        presenter.saveMovieButtonTapped(moviedto: newMovieDTO)
     }
     
     @objc func addMovieNameButtonTapped() {
