@@ -20,6 +20,8 @@ final class DefaultMovieDetailView: UIViewController {
     private let ratingLabel = UILabel()
     private let yearLabel = UILabel()
     private let descriptionLabel = UILabel()
+    private let webBackgroundView = UIView()
+    private let webLabel = UILabel()
     private let webView = WKWebView()
     
     // MARK: - LyfeCycle
@@ -35,7 +37,7 @@ final class DefaultMovieDetailView: UIViewController {
     private func addSubviews() {
         addSubviews([imageView, scrollView], to: view)
         scrollView.addSubview(containerView)
-        addSubviews([titleLabel, ratingContainerView, descriptionLabel, webView], to: containerView)
+        addSubviews([titleLabel, ratingContainerView, descriptionLabel, webBackgroundView, webLabel, webView], to: containerView)
         addSubviews([starImageView, ratingLabel, yearLabel], to: ratingContainerView)
     }
     
@@ -46,7 +48,7 @@ final class DefaultMovieDetailView: UIViewController {
     }
     
     private func configureConstraints() {
-        [imageView, scrollView, containerView, titleLabel, ratingContainerView, starImageView, ratingLabel, yearLabel, descriptionLabel, webView].forEach {
+        [imageView, scrollView, containerView, titleLabel, ratingContainerView, starImageView, ratingLabel, yearLabel, descriptionLabel, webBackgroundView, webLabel, webView].forEach {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
@@ -92,6 +94,15 @@ final class DefaultMovieDetailView: UIViewController {
             descriptionLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 19),
             descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 19),
             
+            webBackgroundView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
+            webBackgroundView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            webBackgroundView.widthAnchor.constraint(equalToConstant: 338),
+            webBackgroundView.heightAnchor.constraint(equalToConstant: 196),
+            webBackgroundView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -52),
+            
+            webLabel.centerXAnchor.constraint(equalTo: webBackgroundView.centerXAnchor),
+            webLabel.centerYAnchor.constraint(equalTo: webBackgroundView.centerYAnchor),
+            
             webView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 24),
             webView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
             webView.widthAnchor.constraint(equalToConstant: 338),
@@ -108,6 +119,10 @@ final class DefaultMovieDetailView: UIViewController {
         containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         
         starImageView.image = UIImage(resource: .star)
+        
+        webBackgroundView.backgroundColor = UIColor(resource: .webViewBackground)
+        webLabel.text = "YouTube trailer"
+        webLabel.font = .systemFont(ofSize: 15)
     }
 }
 
@@ -134,7 +149,7 @@ extension DefaultMovieDetailView: MovieDetailView {
         attributedRatingText.addAttribute(.font, value: UIFont.manrope(ofSize: 14, style: .regular), range: totalRange)
         attributedRatingText.addAttribute(.foregroundColor, value: UIColor.ratingSecondDetailTextLabel, range: totalRange)
         ratingLabel.attributedText = attributedRatingText
-
+        
         if let movieDate = movie.releaseDate {
             let calendar = Calendar.current
             let year = calendar.component(.year, from: movieDate)
@@ -149,9 +164,13 @@ extension DefaultMovieDetailView: MovieDetailView {
         descriptionLabel.numberOfLines = 0
         descriptionLabel.font = .manrope(ofSize: 14, style: .regular)
         
-        if let url = URL(string: movie.link ?? "https") {
-            webView.load(URLRequest(url: url))
-            webView.allowsBackForwardNavigationGestures = true
+        if let link = movie.link, movie.link != "" {
+            if let url = URL(string: link) {
+                webView.load(URLRequest(url: url))
+                webView.allowsBackForwardNavigationGestures = true
+            }
+        } else {
+            webView.isHidden = true
         }
     }
 }

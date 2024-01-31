@@ -22,6 +22,12 @@
 		11C1997C2B69643600643493 /* MovieDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1997B2B69643600643493 /* MovieDTO.swift */; };
 		11C1997F2B69940F00643493 /* AddMovieNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1997E2B69940F00643493 /* AddMovieNameView.swift */; };
 		11C199812B69942300643493 /* AddMovieNamePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C199802B69942300643493 /* AddMovieNamePresenter.swift */; };
+		11C199872B69B82100643493 /* AddMovieLinkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C199862B69B82100643493 /* AddMovieLinkView.swift */; };
+		11C199892B69B82C00643493 /* AddMovieLinkPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C199882B69B82C00643493 /* AddMovieLinkPresenter.swift */; };
+		11C1998B2B69BC6F00643493 /* AddMovieRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1998A2B69BC6F00643493 /* AddMovieRatingView.swift */; };
+		11C1998D2B69BC7A00643493 /* AddMovieRatingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1998C2B69BC7A00643493 /* AddMovieRatingPresenter.swift */; };
+		11C1998F2B69CDC200643493 /* AddMovieReleaseDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C1998E2B69CDC200643493 /* AddMovieReleaseDateView.swift */; };
+		11C199912B69CDCF00643493 /* AddMovieReleaseDatePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11C199902B69CDCF00643493 /* AddMovieReleaseDatePresenter.swift */; };
 		11EC465E2B66CAA7008CFB8D /* Manrope-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EC46572B66CAA7008CFB8D /* Manrope-Light.ttf */; };
 		11EC465F2B66CAA7008CFB8D /* Manrope-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EC46582B66CAA7008CFB8D /* Manrope-ExtraBold.ttf */; };
 		11EC46602B66CAA7008CFB8D /* Manrope-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11EC46592B66CAA7008CFB8D /* Manrope-SemiBold.ttf */; };
@@ -52,6 +58,12 @@
 		11C1997B2B69643600643493 /* MovieDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDTO.swift; sourceTree = "<group>"; };
 		11C1997E2B69940F00643493 /* AddMovieNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieNameView.swift; sourceTree = "<group>"; };
 		11C199802B69942300643493 /* AddMovieNamePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieNamePresenter.swift; sourceTree = "<group>"; };
+		11C199862B69B82100643493 /* AddMovieLinkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieLinkView.swift; sourceTree = "<group>"; };
+		11C199882B69B82C00643493 /* AddMovieLinkPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieLinkPresenter.swift; sourceTree = "<group>"; };
+		11C1998A2B69BC6F00643493 /* AddMovieRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieRatingView.swift; sourceTree = "<group>"; };
+		11C1998C2B69BC7A00643493 /* AddMovieRatingPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieRatingPresenter.swift; sourceTree = "<group>"; };
+		11C1998E2B69CDC200643493 /* AddMovieReleaseDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieReleaseDateView.swift; sourceTree = "<group>"; };
+		11C199902B69CDCF00643493 /* AddMovieReleaseDatePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieReleaseDatePresenter.swift; sourceTree = "<group>"; };
 		11EC46572B66CAA7008CFB8D /* Manrope-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-Light.ttf"; sourceTree = "<group>"; };
 		11EC46582B66CAA7008CFB8D /* Manrope-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-ExtraBold.ttf"; sourceTree = "<group>"; };
 		11EC46592B66CAA7008CFB8D /* Manrope-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Manrope-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -179,6 +191,8 @@
 		11C199822B69942800643493 /* AddLink */ = {
 			isa = PBXGroup;
 			children = (
+				11C199862B69B82100643493 /* AddMovieLinkView.swift */,
+				11C199882B69B82C00643493 /* AddMovieLinkPresenter.swift */,
 			);
 			path = AddLink;
 			sourceTree = "<group>";
@@ -186,6 +200,8 @@
 		11C199832B69942E00643493 /* AddRating */ = {
 			isa = PBXGroup;
 			children = (
+				11C1998A2B69BC6F00643493 /* AddMovieRatingView.swift */,
+				11C1998C2B69BC7A00643493 /* AddMovieRatingPresenter.swift */,
 			);
 			path = AddRating;
 			sourceTree = "<group>";
@@ -193,6 +209,8 @@
 		11C199842B69943500643493 /* AddReleaseDate */ = {
 			isa = PBXGroup;
 			children = (
+				11C1998E2B69CDC200643493 /* AddMovieReleaseDateView.swift */,
+				11C199902B69CDCF00643493 /* AddMovieReleaseDatePresenter.swift */,
 			);
 			path = AddReleaseDate;
 			sourceTree = "<group>";
@@ -308,19 +326,25 @@
 				11C199752B6914A000643493 /* MovieDetailPresenter.swift in Sources */,
 				11B5339E2B5FC114007243AA /* MovieSaver_Swift_CodeUI.xcdatamodeld in Sources */,
 				1178CF672B65493A009586A9 /* MovieListView.swift in Sources */,
+				11C199872B69B82100643493 /* AddMovieLinkView.swift in Sources */,
 				11EC466A2B66F321008CFB8D /* AddMovieView.swift in Sources */,
 				11EC46682B66CD00008CFB8D /* UIFont+Extensions.swift in Sources */,
+				11C1998D2B69BC7A00643493 /* AddMovieRatingPresenter.swift in Sources */,
 				1178CF702B6582FE009586A9 /* MovieTableViewCell.swift in Sources */,
 				11C1997F2B69940F00643493 /* AddMovieNameView.swift in Sources */,
+				11C1998F2B69CDC200643493 /* AddMovieReleaseDateView.swift in Sources */,
 				11C1997C2B69643600643493 /* MovieDTO.swift in Sources */,
 				11C199812B69942300643493 /* AddMovieNamePresenter.swift in Sources */,
 				11EC466C2B66F362008CFB8D /* AddMoviePresenter.swift in Sources */,
+				11C199912B69CDCF00643493 /* AddMovieReleaseDatePresenter.swift in Sources */,
 				11C199772B69569300643493 /* CoreDataManager.swift in Sources */,
+				11C1998B2B69BC6F00643493 /* AddMovieRatingView.swift in Sources */,
 				1178CF6B2B656365009586A9 /* Coordinator.swift in Sources */,
 				11B533942B5FC114007243AA /* AppDelegate.swift in Sources */,
 				11B533962B5FC114007243AA /* SceneDelegate.swift in Sources */,
 				1178CF692B654957009586A9 /* MovieListPresenter.swift in Sources */,
 				11C199732B69143A00643493 /* MovieDetailView.swift in Sources */,
+				11C199892B69B82C00643493 /* AddMovieLinkPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

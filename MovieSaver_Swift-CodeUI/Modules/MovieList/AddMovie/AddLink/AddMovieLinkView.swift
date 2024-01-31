@@ -1,14 +1,14 @@
 import UIKit
 
-protocol AddMovieNameView: AnyObject {
-    func updateTextField(_ movieName: String)
+protocol AddMovieLinkView: AnyObject {
+    func updateTextField(_ movieLink: String)
     func showErrorAlert(error: String)
 }
 
-final class DefaultAddMovieNameView: UIViewController {
+final class DefaultAddMovieLinkView: UIViewController {
     
     // MARK: - Public properties
-    var presenter: AddMovieNamePresenter!
+    var presenter: AddMovieLinkPresenter!
     
     // MARK: - Private properties
     private let pageTitleLabel = UILabel()
@@ -63,23 +63,23 @@ final class DefaultAddMovieNameView: UIViewController {
     private func configureUI() {
         view.backgroundColor = .white
         
-        pageTitleLabel.text = "Film Name"
+        pageTitleLabel.text = "YouTube Link"
         pageTitleLabel.font = .manrope(ofSize: 24, style: .medium)
         
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 17)
         ]
-        textField.attributedPlaceholder = NSAttributedString(string: "Name", attributes: attributes)
+        textField.attributedPlaceholder = NSAttributedString(string: "Link", attributes: attributes)
         
         textFieldLineView.backgroundColor = UIColor(resource: .divider)
         
         saveButton.setTitle("Save", for: .normal)
         saveButton.titleLabel?.font = .manrope(ofSize: 18, style: .medium)
-        saveButton.addTarget(self, action: #selector(saveNameMovieButtonTapped), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveLinkMovieButtonTapped), for: .touchUpInside)
     }
     
-    @objc func saveNameMovieButtonTapped() {
-        presenter.saveMovieNameButtonTapped(nameMovie: textField.text ?? "")
+    @objc func saveLinkMovieButtonTapped() {
+        presenter.saveMovieLinkButtonTapped(linkMovie: textField.text ?? "")
     }
     
     private func hideKeyboard() {
@@ -92,11 +92,11 @@ final class DefaultAddMovieNameView: UIViewController {
     }
 }
 
-// MARK: - AddMovieNameView
-extension DefaultAddMovieNameView: AddMovieNameView {
+// MARK: - AddMovieLinkView
+extension DefaultAddMovieLinkView: AddMovieLinkView {
     
-    func updateTextField(_ movieName: String) {
-        textField.text = movieName
+    func updateTextField(_ movieLink: String) {
+        textField.text = movieLink
     }
     
     func showErrorAlert(error: String) {

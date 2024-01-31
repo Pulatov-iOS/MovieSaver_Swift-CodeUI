@@ -1,7 +1,12 @@
 import UIKit
 
 protocol AddMovieView: AnyObject {
-    func updateData(image: UIImage)
+    func updateMovieImageView(_ imageData: Data)
+    func updateMovieNameLabel(_ movieName: String)
+    func updateMovieRatingLabel(_ movieLink: Double)
+    func updateMovieReleaseDateLabel(_ movieReleaseDate: Date)
+    func updateMovieLinkLabel(_ movieLink: String)
+    func showErrorAlert(error: String)
 }
 
 enum PickerType {
@@ -35,7 +40,7 @@ final class DefaultAddMovieView: UIViewController {
     private let movieNameLabel = UILabel()
     private let movieRatingLabel = UILabel()
     private let movieReleaseDateLabel = UILabel()
-    private let movieYouTubeLinkLabel = UILabel()
+    private let movieLinkLabel = UILabel()
     
     private let descriptionTitleLabel = UILabel()
     private let descriptionTextView = UITextView()
@@ -181,9 +186,9 @@ final class DefaultAddMovieView: UIViewController {
             buttonTappedSelector = #selector(addMovieReleaseDateButtonTapped)
         case .movieYouTubeLink:
             title = "YouTube Link"
-            movieInformationLabel = movieYouTubeLinkLabel
+            movieInformationLabel = movieLinkLabel
             heightView = 82
-            buttonTappedSelector = #selector(addMovieYouTubeLinkButtonTapped)
+            buttonTappedSelector = #selector(addMovieLinkButtonTapped)
         }
         
         let view = UIView()
@@ -265,24 +270,24 @@ final class DefaultAddMovieView: UIViewController {
     }
     
     @objc func saveMovieButtonTapped() {
-        let newMovieDTO = MovieDTO(name: "1", rating: 8.3, releaseDate: Date(), link: "https://github.com/Pulatov-iOS", descriptions: descriptionTextView.text ?? "", image: UIImage(resource: .default).jpegData(compressionQuality: 1.0)!)
-        presenter.saveMovieButtonTapped(moviedto: newMovieDTO)
+        presenter.updateMovieDescription(movieDescription: descriptionTextView.text)
+        presenter.saveMovieButtonTapped()
     }
     
     @objc func addMovieNameButtonTapped() {
-        
+        presenter.addMovieNameButtonTapped()
     }
     
     @objc func addMovieRatingButtonTapped() {
-        
+        presenter.addMovieRatingButtonTapped()
     }
     
     @objc func addMovieReleaseDateButtonTapped() {
-        
+        presenter.addMovieReleaseDateButtonTapped()
     }
     
-    @objc func addMovieYouTubeLinkButtonTapped() {
-      
+    @objc func addMovieLinkButtonTapped() {
+        presenter.addMovieLinkButtonTapped()
     }
     
     private func moveContentForKeyboard() {
@@ -338,14 +343,41 @@ final class DefaultAddMovieView: UIViewController {
 // MARK: - AddMovieView
 extension DefaultAddMovieView: AddMovieView {
     
-    func updateData(image: UIImage) {
-        addImageButtomImageView.image = image
-        
+    func updateMovieImageView(_ imageData: Data) {
+        if let image = UIImage(data: imageData) {
+            addImageButtomImageView.image = image
+        } else {
+            addImageButtomImageView.image = UIImage(resource: .default)
+        }
         imageViewWidthConstraint.constant = 150
         imageViewHeightConstraint.constant = 150
         addImageButtomImageView.layer.cornerRadius = 75
         addImageButtomImageView.clipsToBounds = true
         addImageButtomImageView.contentMode = .scaleAspectFill
+    }
+    
+    func updateMovieNameLabel(_ movieName: String) {
+        movieNameLabel.text = movieName
+    }
+    
+    func updateMovieRatingLabel(_ movieLink: Double) {
+        movieRatingLabel.text = "\(movieLink)"
+    }
+    
+    func updateMovieReleaseDateLabel(_ movieReleaseDate: Date) {
+        let calendar = Calendar.current
+        let year = calendar.component(.year, from: movieReleaseDate)
+        movieReleaseDateLabel.text = "\(year)"
+    }
+    
+    func updateMovieLinkLabel(_ movieLink: String) {
+        movieLinkLabel.text = movieLink
+    }
+    
+    func showErrorAlert(error: String) {
+        let alert = UIAlertController(title: "Warning!", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
     }
 }
 
@@ -355,7 +387,7 @@ extension DefaultAddMovieView: UIImagePickerControllerDelegate, UINavigationCont
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             DispatchQueue.main.async {
-                self.presenter.selectedMovieImage(image: image)
+                self.presenter.selectedMovieImage(imageData: image.jpegData(compressionQuality: 0.5) ?? Data())
             }
         }
         picker.dismiss(animated: true, completion: nil)
