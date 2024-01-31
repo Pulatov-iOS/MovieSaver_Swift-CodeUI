@@ -18,16 +18,16 @@ The graphical interface and navigation of the application are implemented using 
 
 ## Used libraries
 
-<input type="checkbox" checked style="color:green;" disabled> UIKit
-<input type="checkbox" checked style="color:green;" disabled> CoreData
-<input type="checkbox" checked style="color:green;" disabled> WebKit
+- [x] UIKit
+- [x] CoreData
+- [x] WebKit
 
 ## Features
 
-<input type="checkbox" checked style="color:green;" disabled> Saving watched movies with the ability to add a rating.
-<input type="checkbox" checked style="color:green;" disabled> Viewing previously added movies.
-<input type="checkbox" checked style="color:green;" disabled> Viewing movie descriptions with their full information.
-<input type="checkbox" checked style="color:green;" disabled> Ability to add images of movie covers from the device's album and using the device's camera.
+- [x] Saving watched movies with the ability to add a rating.
+- [x] Viewing previously added movies.
+- [x] Viewing movie descriptions with their full information.
+- [x] Ability to add images of movie covers from the device's album and using the device's camera.
 
 ## Links
 
