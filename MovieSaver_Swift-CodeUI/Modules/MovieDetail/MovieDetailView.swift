@@ -114,6 +114,8 @@ final class DefaultMovieDetailView: UIViewController {
     private func configureUI() {
         view.backgroundColor = UIColor(resource: .movieDetailBackground)
         
+        imageView.contentMode = .scaleAspectFill
+        
         containerView.backgroundColor = UIColor(resource: .movieDetailBackground)
         containerView.layer.cornerRadius = 16
         containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
