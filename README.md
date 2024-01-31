@@ -9,8 +9,8 @@ MovieSaver - an iOS application designed for quick saving of watched movies and 
 
 ## Screenshots
 
-<img src="screenshots/demoFirst.gif">
-<img src="screenshots/demoSecond.gif">
+<img src="Screenshots/demoFirst.gif">
+<img src="Screenshots/demoSecond.png">
 
 ## About
 
