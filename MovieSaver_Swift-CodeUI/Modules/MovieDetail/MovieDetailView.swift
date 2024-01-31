@@ -134,6 +134,8 @@ extension DefaultMovieDetailView: MovieDetailView {
             if let image = UIImage(data: dateImage) {
                 imageView.image = image
             }
+        } else {
+            imageView.image = UIImage(resource: .default)
         }
         
         titleLabel.text = movie.name ?? ""

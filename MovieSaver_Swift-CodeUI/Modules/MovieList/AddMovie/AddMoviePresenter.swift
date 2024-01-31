@@ -31,7 +31,7 @@ final class DefaultAddMoviePresenter {
     var closeAddMovieScreen: (() -> Void)?
     
     // MARK: - Private properties
-    private var moviedto = MovieDTO(name: "", rating: 5.0, releaseDate: Date(), link: "", descriptions: "", image: Data())
+    private var moviedto = MovieDTO(name: "", rating: 5.0, releaseDate: Date(), link: "", descriptions: "")
     private var allMovieParametersFilled: [MovieParameters] = []
     
     init(view: AddMovieView) {

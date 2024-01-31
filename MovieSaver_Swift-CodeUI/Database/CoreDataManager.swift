@@ -25,7 +25,9 @@ final class CoreDataManager {
         movie.setValue(moviedto.releaseDate, forKey: "releaseDate")
         movie.setValue(moviedto.link, forKey: "link")
         movie.setValue(moviedto.descriptions, forKey: "descriptions")
-        movie.setValue(moviedto.image, forKey: "image")
+        if let image = moviedto.image {
+            movie.setValue(image, forKey: "image")
+        }
  
         do {
             try manageContext.save()

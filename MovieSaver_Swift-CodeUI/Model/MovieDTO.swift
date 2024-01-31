@@ -6,5 +6,5 @@ struct MovieDTO {
     var releaseDate: Date
     var link: String
     var descriptions: String
-    var image: Data
+    var image: Data?
 }

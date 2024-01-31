@@ -2,6 +2,7 @@ import UIKit
 
 protocol MovieListView: AnyObject {
     func updateMovieListView(movies: [Movie])
+    func showErrorAlert(error: String)
 }
 
 final class DefaultMovieListView: UIViewController {
@@ -74,6 +75,12 @@ extension DefaultMovieListView: MovieListView {
     
     func updateMovieListView(movies: [Movie]) {
         self.movies = movies
+    }
+    
+    func showErrorAlert(error: String) {
+        let alert = UIAlertController(title: "Error!", message: error, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        present(alert, animated: true)
     }
 }
 

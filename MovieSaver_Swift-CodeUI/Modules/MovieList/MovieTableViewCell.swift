@@ -23,7 +23,7 @@ final class MovieTableViewCell: UITableViewCell {
         cellTappedHandler()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -79,6 +79,8 @@ final class MovieTableViewCell: UITableViewCell {
             if let image = UIImage(data: dateImage) {
                 movieImageView.image = image
             }
+        } else {
+            movieImageView.image = UIImage(resource: .default)
         }
         
         nameLabel.text = movie?.name ?? ""

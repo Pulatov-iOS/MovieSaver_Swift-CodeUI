@@ -31,7 +31,7 @@ extension DefaultMovieListPresenter: MovieListPresenter {
                 self.view.updateMovieListView(movies: movies)
             }
         case .failure(let failure):
-            print(failure)// Уведомление //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            view.showErrorAlert(error: failure.localizedDescription)
         }
     }
     
