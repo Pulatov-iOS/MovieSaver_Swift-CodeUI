@@ -71,6 +71,7 @@ final class MovieTableViewCell: UITableViewCell {
         
         movieImageView.clipsToBounds = true
         movieImageView.layer.cornerRadius = 8
+        movieImageView.contentMode = .scaleAspectFill
         movieImageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
     }
     
